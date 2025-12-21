@@ -396,46 +396,28 @@ const ProjectsPage = () => {
                 </div>
 
                 {/* Stats Summary */}
-                <div className="mt-16 grid grid-cols-3 md:grid-cols-3 gap-8">
-                    <div className="text-center p-6 rounded-2xl bg-gray-800/30 backdrop-blur-sm">
-                        <div className="text-3xl font-bold text-highlight">{projects.length}</div>
-                        <div className="text-gray-300 mt-2">Total Projects</div>
+                <div className="mt-16 grid grid-cols-3 gap-4 md:gap-8">
+                    <div className="text-center p-4 md:p-6 rounded-2xl bg-gray-800/30 backdrop-blur-sm">
+                        {/* Adjusted font size: text-xl on mobile, text-3xl on small screens and up */}
+                        <div className="text-xl sm:text-3xl font-bold text-highlight">{projects.length}</div>
+                        {/* Adjusted font size: text-xs on mobile, text-base on small screens and up */}
+                        <div className="text-gray-300 mt-1 sm:mt-2 text-xs sm:text-base">Total Projects</div>
                     </div>
-                    <div className="text-center p-6 rounded-2xl bg-gray-800/30 backdrop-blur-sm">
-                        <div className="text-3xl font-bold text-highlight">
+
+                    <div className="text-center p-4 md:p-6 rounded-2xl bg-gray-800/30 backdrop-blur-sm">
+                        <div className="text-xl sm:text-3xl font-bold text-highlight">
                             {new Set(projects.flatMap(p => p.technologies)).size}
                         </div>
-                        <div className="text-gray-300 mt-2">Technologies</div>
+                        <div className="text-gray-300 mt-1 sm:mt-2 text-xs sm:text-base">Technologies</div>
                     </div>
-                    <div className="text-center p-6 rounded-2xl bg-gray-800/30 backdrop-blur-sm">
-                        <div className="text-3xl font-bold text-highlight">
+
+                    <div className="text-center p-4 md:p-6 rounded-2xl bg-gray-800/30 backdrop-blur-sm">
+                        <div className="text-xl sm:text-3xl font-bold text-highlight">
                             {projects.filter(p => p.liveDemo).length}
                         </div>
-                        <div className="text-gray-300 mt-2">Live Demos</div>
+                        <div className="text-gray-300 mt-1 sm:mt-2 text-xs sm:text-base">Live Demos</div>
                     </div>
                 </div>
-
-                {/* Call to Action
-                <div className="mt-16 text-center" id='contact'>
-                    <div className="inline-flex flex-col sm:flex-row items-center gap-6 p-8 rounded-3xl 
-                                    bg-gradient-to-r from-gray-900/50 to-background/30 backdrop-blur-sm 
-                                    border border-gray-800/50">
-                        <div className="text-left">
-                            <h3 className="text-2xl font-bold text-white mb-2">Have a project in mind?</h3>
-                            <p className="text-gray-300">Let's build something amazing together</p>
-                        </div>
-                        <a
-                            
-                            href="mailto:ayshaaktersumi630@gmail.com"
-                            target="_blank"
-                            className="px-8 py-3 rounded-full bg-accent !text-white hover:opacity-90 transition-opacity flex items-center gap-2"
-                        >
-                            Send an Email
-                            <FaExternalLinkAlt className="text-sm" />
-                        </a>
-                    </div>
-                </div> */}
-
                 {/* Contact / Call to Action */}
                 <div className="mt-24 text-center" id="contact">
                     <div

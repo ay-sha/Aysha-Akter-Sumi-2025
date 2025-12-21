@@ -104,7 +104,7 @@ const HeroPage = () => {
                                 sm:mt-2
                             "
                         >
-                            I'm Aysha. I work at the intersection of{" "}
+                            I work at the intersection of{" "}
                             <span className="inline-block bg-secondary text-background px-3 py-1 sm:px-2 sm:py-0.1 rounded-[30px] mb-2 mt-1">
                                 Web Application
                             </span>
