@@ -1,0 +1,82 @@
+{
+  "profile": {
+    "name": "Aysha Akter Sumi",
+    "title": "Software Engineer",
+    "description": "I work at the intersection of",
+    "heroHighlights": ["Web Application", "Salesforce", "Scalable Systems"],
+    "aboutHeadline": "I'm Aysha Akter Sumi, Building Scalable, User-Centric Applications.",
+    "aboutDescription": ["I'm a software engineer with experience across full-stack development.", "Currently, I work at Twinforce Solution Limited."],
+    "aboutImage": "/assets/myPhoto.png",
+    "currentCompany": "Twinforce Solution Limited",
+    "phone": "+8801884394630",
+    "email": "ayshaaktersumi630@gmail.com",
+    "instagram": "https://www.instagram.com/aysha__amin_",
+    "github": "http://github.com/ay-sha",
+    "linkedin": "http://www.linkedin.com/in/aysha-akter-sumi"
+  },
+  "projects": [
+    {
+      "title": "Nivaasi",
+      "description": "Full-stack accommodation rental web application",
+      "longDescription": "It delivers a seamless rental experience with user authentication, property listings, reviews, search, and filtering features.",
+      "technologies": ["HTML", "CSS", "JavaScript", "EJS", "Bootstrap", "Node.js", "Express.js", "MongoDB Atlas", "Cloudinary", "Joi", "Passport.js", "Render.com"],
+      "category": "fullstack",
+      "github": "https://github.com/ay-sha/Nivaasi",
+      "liveDemo": "https://nivaasi.onrender.com/",
+      "image": "/Projects/nivaasi.png"
+    },
+    {
+      "title": "Defiine",
+      "description": "Simple and responsive online dictionary web application",
+      "longDescription": "It provides real-time word definitions, parts of speech, synonyms, and example usages.",
+      "technologies": ["HTML5", "CSS3", "JavaScript", "Dictionary API integration"],
+      "category": "frontend",
+      "github": "https://github.com/ay-sha/Defiine",
+      "liveDemo": "https://ay-sha.github.io/Defiine/",
+      "image": "/Projects/defiine.PNG"
+    },
+    {
+      "title": "Infinity",
+      "description": "Responsive corporate website for an IT company",
+      "longDescription": "It is designed to enhance an IT company's digital presence through a clean, responsive, and professional interface.",
+      "technologies": ["HTML", "CSS", "JavaScript", "Bootstrap", "OWL Carousel (jQuery)"],
+      "category": "frontend",
+      "github": "https://github.com/ay-sha/Infinity",
+      "liveDemo": "https://ay-sha.github.io/Infinity/",
+      "image": "/Projects/infinity.PNG"
+    },
+    {
+      "title": "DIU NoteShare",
+      "description": "Full-stack web application for DIU students",
+      "longDescription": "It provides secure user authentication, note upload and download, and powerful search features.",
+      "technologies": ["HTML", "CSS", "JavaScript", "jQuery", "Django", "Python", "SQLite"],
+      "category": "fullstack",
+      "github": "https://github.com/ay-sha/DIU_NoteShare",
+      "liveDemo": "",
+      "image": "/Projects/noteshare.jpg"
+    },
+    {
+      "title": "Remover",
+      "description": "Web application to remove image backgrounds",
+      "longDescription": "It enables users to upload images and automatically generate clean, background-free results.",
+      "technologies": ["React", "TailwindCSS", "Firebase", "Cloudinary", "Stripe"],
+      "category": "fullstack",
+      "github": "https://github.com/ay-sha/Remover",
+      "liveDemo": "",
+      "image": "/Projects/remover.jpeg"
+    },
+    {
+      "title": "2D Car Game",
+      "description": "2D Car Game developed using C++ and OpenGL",
+      "longDescription": "The game offers a simple yet engaging 2D environment with real-time controls.",
+      "technologies": ["C++", "OpenGL"],
+      "category": "graphics",
+      "github": "https://github.com/ay-sha/2D_CarGame",
+      "liveDemo": "",
+      "image": "/Projects/2Dgame.jpg"
+    }
+  ],
+  "experiences": [],
+  "education": [],
+  "skills": []
+}

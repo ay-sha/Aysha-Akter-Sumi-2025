@@ -16,7 +16,7 @@ html, body {
   overflow-y: auto;
   max-width: 100%;
   scroll-behavior: smooth;
-  overscroll-behavior-y: none;
+  /* overscroll-behavior-y: none; */
 }
 
 /* Apply Tailwind with your custom colors */

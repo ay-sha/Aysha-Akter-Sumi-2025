@@ -1,10 +1,27 @@
 import React, { useMemo, useState, useEffect } from "react";
-import svg2 from "../assets/svg2.svg";
+import { usePortfolio } from "../context/PortfolioContext";
+import API_URL from "../config.js";
+import svg2 from "/assets/svg2.svg";
 
 const HeroPage = () => {
+    const { profile, refetch } = usePortfolio();
+    const [directProfile, setDirectProfile] = useState(null);
     const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
-    // Check scroll position to show/hide indicator
+    useEffect(() => {
+        fetch(`${API_URL}/profile`)
+            .then(r => r.json())
+            .then(d => {
+                console.log('Direct fetch profile:', d);
+                setDirectProfile(d);
+            })
+            .catch(err => console.log('Fetch error:', err));
+    }, []);
+
+    useEffect(() => {
+        refetch();
+    }, []);
+
     useEffect(() => {
         const handleScroll = () => {
             const heroSection = document.getElementById('home');
@@ -14,9 +31,6 @@ const HeroPage = () => {
                 const heroRect = heroSection.getBoundingClientRect();
                 const aboutRect = aboutSection.getBoundingClientRect();
                 
-                // Show indicator when:
-                // 1. Hero section is mostly in view (more than 50% visible)
-                // 2. OR we haven't reached the About section yet
                 const isHeroVisible = heroRect.bottom > window.innerHeight * 0.3;
                 const hasReachedAbout = aboutRect.top <= window.innerHeight * 0.5;
                 
@@ -25,13 +39,11 @@ const HeroPage = () => {
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
-        // Initial check
         handleScroll();
         
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // ⭐ Generate stars once (fixes Math.random render error)
     const stars = useMemo(() => {
         return Array.from({ length: 100 }).map(() => ({
             size: Math.random() * 3 + 1,
@@ -43,9 +55,10 @@ const HeroPage = () => {
         }));
     }, []);
 
+    const highlights = directProfile?.heroHighlights || profile?.heroHighlights || ['Web Application', 'Salesforce', 'Scalable Systems'];
+
     return (
         <section id="home" className="relative pt-20 sm:pt-32 md:pt-20 lg:pt-10 xl:pt-10 overflow-hidden w-full min-h-screen">
-            {/* 🌌 Night Sky Background with Stars */}
             <div className="fixed inset-0 pointer-events-none">
                 {stars.map((star, i) => (
                     <div
@@ -63,65 +76,55 @@ const HeroPage = () => {
                 ))}
             </div>
 
-            {/* 🌈 Background gradient effects */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-2 left-8 w-72 md:w-96 h-72 md:h-96 bg-secondary/5 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-1/4 right-1/4 w-72 md:w-96 h-72 md:h-96 bg-highlight/5 rounded-full blur-3xl"></div>
+                <div className="absolute top-2 left-8 w-72 md:w-96 h-72 md:h-96 bg-[#7979EF]/5 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-1/4 right-1/4 w-72 md:w-96 h-72 md:h-96 bg-[#AAD05D]/5 rounded-full blur-3xl"></div>
             </div>
 
-            {/* 🔹 Main container */}
-            <div className="relative w-full px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-10">
-
-                {/* TEXT CONTENT */}
+            <div className="relative w-full px-6 sm:px-8 lg:px-12 pt-8 sm:pt-10 pb-10">
                 <div className="flex justify-start md:justify-end">
                     <div className="w-full md:w-2/3 mb-6 sm:mb-8 md:mb-0">
-
-                        {/* Hey, There! */}
                         <div className="flex justify-start mb-4 sm:mb-6">
-                            <span className="inline-block bg-highlight2 text-background px-4 py-2 sm:px-3 sm:py-1 rounded-[20px] text-2xl sm:text-2xl md:text-3xl xl:text-4xl font-body-bold">
+                            <span className="inline-block bg-[#d1ff87] text-[#161616] px-4 py-2 sm:px-3 sm:py-1 rounded-[20px] text-2xl sm:text-2xl md:text-3xl xl:text-4xl font-bold">
                                 Hey, There!
                             </span>
                         </div>
 
-                        {/* Main paragraph */}
                         <p
                             className="
-                                text-3xl
-                                sm:text-xl
+                                text-2xl
+                                sm:text-3xl
                                 md:text-4xl
                                 lg:text-5xl
                                 xl:text-6xl
-                                2xl:text-7xl
-                                font-hero-bold
-                                xl:hero-striking
+                                font-bold
                                 leading-[1.3]
                                 sm:leading-[1.2]
                                 xl:leading-[1.15]
-                                text-primary
+                                text-[#E3E5C4]
                                 text-justify
                                 sm:text-left
                                 mt-4
                                 sm:mt-2
                             "
                         >
-                            I work at the intersection of{" "}
-                            <span className="inline-block bg-secondary text-background px-3 py-1 sm:px-2 sm:py-0.1 rounded-[30px] mb-2 mt-1">
-                                Web Application
+                            {(directProfile?.description) ? directProfile.description : "I work at the intersection of"}{" "}
+                            <span className="inline-block bg-[#7979EF] text-black px-3 py-1 sm:px-2 sm:py-0.1 rounded-[30px] mb-2 mt-1">
+                                {highlights[0]}
                             </span>
                             ,{" "}
-                            <span className="inline-block bg-highlight text-background px-3 py-1 sm:px-2 sm:py-0.1 rounded-[30px] mb-2 mt-1">
-                                Salesforce
+                            <span className="inline-block bg-[#AAD05D] text-[#161616] px-3 py-1 sm:px-2 sm:py-0.1 rounded-[30px] mb-2 mt-1">
+                                {highlights[1]}
                             </span>
                             , and{" "}
-                            <span className="inline-block bg-accent text-background px-3 py-1 sm:px-2 sm:py-0.1 rounded-[30px] mt-1">
-                                Scalable Systems
+                            <span className="inline-block bg-[#D4655A] text-black px-3 py-1 sm:px-2 sm:py-0.1 rounded-[30px] mt-1">
+                                {highlights[2]}
                             </span>
                             .
                         </p>
                     </div>
                 </div>
 
-                {/* 🖼️ ILLUSTRATION SECTION */}
                 <div
                     className="
                         relative
@@ -142,8 +145,6 @@ const HeroPage = () => {
                     "
                 >
                     <div className="absolute inset-0 flex items-center justify-center pt-0 px-4 sm:px-6 md:px-8">
-
-                        {/* Background blob */}
                         <div className="absolute -top-8 lg:-top-20 -left-4 w-[120%] h-[120%]">
                             <svg
                                 viewBox="0 0 200 200"
@@ -158,7 +159,6 @@ const HeroPage = () => {
                             </svg>
                         </div>
 
-                        {/* Main SVG */}
                         <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8">
                             <img
                                 src={svg2}
@@ -170,7 +170,6 @@ const HeroPage = () => {
                 </div>
             </div>
 
-            {/* ⬇️ SCROLL INDICATOR - Shows only in Hero section */}
             {showScrollIndicator && (
                 <div 
                     onClick={() => {
@@ -183,22 +182,17 @@ const HeroPage = () => {
                     style={{ opacity: showScrollIndicator ? 1 : 0 }}
                 >
                     <div className="flex flex-col items-center gap-3">
-                        <span className="text-sm tracking-[0.4em] uppercase text-secondary/80 font-medium animate-pulse">
+                        <span className="text-sm tracking-[0.4em] uppercase text-[#7979EF]/80 font-medium animate-pulse">
                             Scroll down
                         </span>
 
                         <div className="relative">
-                            {/* Outer ring */}
-                            <div className="w-12 h-12 rounded-full border-2 border-secondary/30 animate-ping absolute"></div>
-
-                            {/* Middle ring */}
-                            <div className="w-12 h-12 rounded-full border border-secondary/40 absolute animate-pulse"></div>
-
-                            {/* Arrow */}
-                            <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-secondary/5 to-transparent rounded-full backdrop-blur-sm">
+                            <div className="w-12 h-12 rounded-full border-2 border-[#7979EF]/30 animate-ping absolute"></div>
+                            <div className="w-12 h-12 rounded-full border border-[#7979EF]/40 absolute animate-pulse"></div>
+                            <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#7979EF]/5 to-transparent rounded-full backdrop-blur-sm">
                                 <div className="animate-bounce">
                                     <svg
-                                        className="w-6 h-6 text-secondary drop-shadow-lg"
+                                        className="w-6 h-6 text-[#7979EF] drop-shadow-lg"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"

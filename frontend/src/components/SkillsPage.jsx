@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-const skills = [
+import API_URL from '../config.js';
+
+const defaultSkills = [
     { name: "ReactJS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
     { name: "LWC", logo: "/lwc.svg" },
     { name: "APEX", logo: "/apex.svg" },
@@ -30,18 +32,27 @@ const skills = [
 
 const SkillsPage = () => {
     const [grid, setGrid] = useState({ rows: 9, cols: 9 });
+    const [skills, setSkills] = useState(defaultSkills);
+
+    useEffect(() => {
+        fetch(`API_URL/skills`)
+            .then(res => res.json())
+            .then(data => {
+                if (data?.length) setSkills(data);
+            })
+            .catch(() => {});
+    }, []);
 
     useEffect(() => {
         const updateGrid = () => {
             if (window.innerWidth < 640) {
-                setGrid({ rows: 6, cols: 5 });
+                setGrid({ rows: 9, cols: 5 });
             } else if (window.innerWidth < 1024) {
-                setGrid({ rows: 7, cols: 7 });
+                setGrid({ rows: 9, cols: 7 });
             } else {
                 setGrid({ rows: 9, cols: 9 });
             }
         };
-
         updateGrid();
         window.addEventListener("resize", updateGrid);
         return () => window.removeEventListener("resize", updateGrid);
@@ -51,17 +62,14 @@ const SkillsPage = () => {
 
     return (
         <section id="skills" className="bg-background py-20 px-4 sm:px-6 relative">
-            {/* Divider */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[85%] h-px bg-gradient-to-r from-transparent via-highlight/40 to-transparent" />
 
-            {/* Header */}
             <div className="text-center mb-12">
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-hero-bold">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-hero-bold">
                     Tools I Love & Work With
                 </h2>
             </div>
 
-            {/* Responsive Grid */}
             <div
                 className={`
                     max-w-6xl mx-auto grid justify-items-center
@@ -73,7 +81,6 @@ const SkillsPage = () => {
                 {Array.from({ length: grid.rows }).map((_, rowIndex) =>
                     Array.from({ length: grid.cols }).map((_, colIndex) => {
                         const isOddRow = rowIndex % 2 === 0;
-
                         const shouldPlace = isOddRow
                             ? colIndex % 2 !== 0
                             : colIndex % 2 === 0;
@@ -136,7 +143,6 @@ const SkillsPage = () => {
                 )}
             </div>
 
-            {/* Floating animation */}
             <style>{`
                 @keyframes float {
                     0%, 100% { transform: translateY(0); }

@@ -75,19 +75,16 @@ const CustomCursor = () => {
   // Don't render on mobile
   if (isMobile) return null;
 
-  return (
-    <motion.div
-      className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full"
-      variants={variants}
-      animate={cursorVariant}
-      transition={{
-        type: 'spring',
-        stiffness: 400,
-        damping: 25,
-        mass: 0.8
-      }}
-    />
-  );
+  // Inside CustomCursor.jsx - Make sure the div is exactly this:
+return (
+  <motion.div
+    className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full"
+    variants={variants}
+    animate={cursorVariant}
+    style={{ position: 'fixed', pointerEvents: 'none' }} // Force it here too
+    transition={{ type: 'spring', stiffness: 400, damping: 25, mass: 0.8 }}
+  />
+);
 };
 
 export default CustomCursor;

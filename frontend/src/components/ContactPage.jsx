@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { usePortfolio } from "../context/PortfolioContext";
 import {
   FaPhone,
   FaInstagram,
@@ -8,10 +9,11 @@ import {
 } from "react-icons/fa";
 
 const ContactPage = () => {
+  const { profile } = usePortfolio();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("+8801884394630");
+    navigator.clipboard.writeText(profile?.phone || "+8801884394630");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -26,7 +28,6 @@ const ContactPage = () => {
         overflow-hidden
       "
     >
-      {/* ================= BACKGROUND (SAME AS PROJECTS) ================= */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-96 h-96 bg-highlight/10 rounded-full blur-3xl animate-pulse" />
         <div
@@ -50,18 +51,16 @@ const ContactPage = () => {
         ))}
       </div>
 
-      {/* ================= CONTENT ================= */}
       <div className="relative z-10 max-w-5xl mx-auto text-center">
-        <h2 className="text-5xl sm:text-6xl font-bold text-primary mb-6">
-          Let’s Work Together
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-6">
+          Let's Work Together
         </h2>
 
         <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-14">
-          Have a project in mind? Let’s build something meaningful, scalable,
+          Have a project in mind? Let's build something meaningful, scalable,
           and user-centric.
         </p>
 
-        {/* CONTACT CARD */}
         <div
           className="
             relative inline-flex flex-col sm:flex-row items-center gap-8
@@ -71,10 +70,8 @@ const ContactPage = () => {
             shadow-[0_0_60px_-15px_rgba(99,102,241,0.45)]
           "
         >
-          {/* Glow */}
           <div className="absolute inset-0 rounded-3xl bg-accent/10 blur-2xl -z-10" />
 
-          {/* LEFT */}
           <div className="text-left max-w-md">
             <h3 className="text-3xl font-extrabold text-white mb-2">
               Contact Me
@@ -87,13 +84,11 @@ const ContactPage = () => {
             <p className="text-gray-400 mb-6">
               Email:{" "}
               <span className="text-highlight2 font-medium">
-                ayshaaktersumi630@gmail.com
+                {profile?.email || "ayshaaktersumi630@gmail.com"}
               </span>
             </p>
 
-            {/* SOCIAL ICONS */}
             <div className="flex items-center gap-5">
-              {/* PHONE */}
               <div className="relative group">
                 <button onClick={handleCopy} aria-label="Copy phone number">
                   <FaPhone className="text-xl text-gray-300 hover:text-highlight transition" />
@@ -110,14 +105,14 @@ const ContactPage = () => {
                     {copied ? (
                       <span className="text-green-400">✓ Copied</span>
                     ) : (
-                      "+880 1884-394630"
+                      profile?.phone || "+880 1884-394630"
                     )}
                   </div>
                 </div>
               </div>
 
               <a
-                href="https://www.instagram.com/aysha__amin_"
+                href={profile?.instagram || "https://www.instagram.com/aysha__amin_"}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -125,7 +120,7 @@ const ContactPage = () => {
               </a>
 
               <a
-                href="https://github.com/ay-sha"
+                href={profile?.github || "https://github.com/ay-sha"}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -133,7 +128,7 @@ const ContactPage = () => {
               </a>
 
               <a
-                href="https://www.linkedin.com/in/aysha-akter-sumi"
+                href={profile?.linkedin || "https://www.linkedin.com/in/aysha-akter-sumi"}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -142,10 +137,9 @@ const ContactPage = () => {
             </div>
           </div>
 
-          {/* RIGHT */}
           <div className="flex flex-col items-center sm:items-start gap-4">
             <a
-              href="mailto:ayshaaktersumi630@gmail.com"
+              href={`mailto:${profile?.email || "ayshaaktersumi630@gmail.com"}`}
               className="
                 px-9 py-4 rounded-full bg-black text-highlight
                 text-lg font-semibold
@@ -160,8 +154,7 @@ const ContactPage = () => {
         </div>
       </div>
 
-      {/* FLOAT ANIMATION (same as Projects) */}
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-20px); }

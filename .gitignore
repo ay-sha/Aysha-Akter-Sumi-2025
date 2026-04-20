@@ -11,6 +11,13 @@ node_modules
 dist
 dist-ssr
 *.local
+backend/.env
+
+# Data file - runtime data, do not commit
+backend/data.json
+
+# But keep the template for deployment
+# backend/data.template.json - keep in repo
 
 # Editor directories and files
 .vscode/*
