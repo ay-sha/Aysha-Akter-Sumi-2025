@@ -11,7 +11,7 @@ import ContactPage from './components/ContactPage';
 function App() {
 
   return (
-    <div className="bg-[#161616] text-[#E3E5C4] relative overflow-hidden">
+    <div className="bg-[#161616] text-[#E3E5C4] relative overflow-x-hidden">
     <CustomCursor />
     <Navbar />
     <HeroPage/>
